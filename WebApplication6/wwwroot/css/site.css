@@ -1,0 +1,120 @@
+﻿header {
+    background-color: #446FB5; /* Màu nền xanh */
+    color: white;
+    width: 100%; /* Chiều ngang full màn hình */
+    margin: 0;
+    padding: 0;
+}
+
+    header .container-fluid {
+        padding-left: 15px; /* Thêm khoảng cách trái */
+        padding-right: 15px; /* Thêm khoảng cách phải */
+    }
+
+    header .navbar-brand img {
+        width: 148px;
+        height: 40px;
+    }
+
+    header p {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    header .dropdown-menu {
+        min-width: 200px;
+    }
+
+    header a {
+        font-size: 14px;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        margin-right: 10px; /* Thêm khoảng cách giữa các liên kết */
+    }
+
+        header a:hover {
+            color: #ffd700; /* Màu highlight khi hover */
+        }
+
+    header .btn-light {
+        background-color: white;
+        color: #007bff;
+        border: 1px solid #007bff;
+    }
+
+        header .btn-light:hover {
+            background-color: #f8f9fa;
+            color: #0056b3;
+        }
+
+.text-wrap {
+    line-height: 1.5; /* Tăng khoảng cách giữa hai dòng */
+    font-size: 14px; /* Điều chỉnh kích thước font */
+    white-space: nowrap; /* Ngăn văn bản bị xuống dòng */
+}
+
+header .fw-bold {
+    font-weight: bold; /* Tất cả chữ đều in đậm */
+}
+
+header .d-flex {
+    gap: 15px; /* Thêm khoảng cách giữa các phần tử */
+    align-items: center; /* Căn giữa các phần tử */
+}
+
+/* Điều chỉnh dropdown để không bị dính vào nhau */
+header .dropdown-menu {
+    padding: 10px 0; /* Thêm padding trên và dưới */
+}
+
+header .navbar-nav {
+    margin-left: auto; /* Đẩy các liên kết sang bên phải */
+}
+
+header .dropdown-toggle {
+    display: inline-block;
+    min-width: 120px; /* Cố định chiều rộng của các phần tử dropdown */
+    text-align: center;
+}
+
+header .navbar .d-flex {
+    gap: 20px; /* Khoảng cách giữa các phần tử trong navbar */
+}
+
+/* Responsive, đảm bảo các phần tử trong navbar không bị chật khi thu nhỏ màn hình */
+@media (max-width: 768px) {
+    header .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    header .navbar-nav {
+        margin-left: 0;
+    }
+}
+header .btn-light.active {
+    background-color: #ffd700; /* Màu nền khi được chọn */
+    color: #003366; /* Màu chữ khi được chọn */
+    border-color: #ffd700; /* Viền khi được chọn */
+}
+
+header .btn-light:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+}
+
+header .btn-light {
+    background-color: white;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+    header .btn-light.active:hover {
+        background-color: #ffd700; /* Giữ màu nền khi hover trên nút đang được chọn */
+        color: #003366; /* Giữ màu chữ khi hover */
+    }
+
+
+
+

@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .nav-tabs .nav-link {
+        color: #888;
+        border: none;
+    }
+
+        .nav-tabs .nav-link.active {
+            color: #ffffff;
+            background-color: #007bff;
+            border-bottom: 2px solid transparent;
+        }
+
+    .input-group-text {
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+
+    .input-group input {
+        border: 1px solid #ddd;
+        border-right: none;
+    }
+
+    button.toggle-password {
+        border: none;
+        background-color: transparent;
+    }
+
+    .tab-pane {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+        .tab-pane.active {
+            opacity: 1;
+        }
+
+
+</style>
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center" style="margin-top: -100px">
+    <div class="row shadow rounded bg-white" style="width: 900px;">
+        <!-- Bên trái - Ảnh -->
+        <div class="col-lg-6 bg-light d-flex align-items-center justify-content-center">
+            <img src="~/images/bus_image_placeholder.png" alt="Bus" class="img-fluid" />
+        </div>
+
+        <!-- Bên phải - Đăng nhập/Đăng ký -->
+        <div class="col-lg-6 p-4">
+              
+            <!-- Tabs -->
+            <ul class="nav nav-tabs mb-3" id="tabControl" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active fw-bold text-uppercase" id="login-tab" data-bs-toggle="tab"
+                            data-bs-target="#login" type="button" role="tab" aria-controls="login"
+                            aria-selected="true" onclick="changeTitle('login')">
+                        <span data-translate="login">Đăng nhập</span>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-bold text-uppercase" id="register-tab" data-bs-toggle="tab"
+                            data-bs-target="#register" type="button" role="tab" aria-controls="register"
+                            aria-selected="false" onclick="changeTitle('register')">
+                        <span data-translate="register">Đăng ký</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="tabContent">
+                <!-- Đăng nhập -->
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                    <h4 id="tabTitle" class="text-center mb-4 fw-bold" data-translate="login-title">Đăng nhập tài khoản</h4>
+                    <form asp-action="Login" method="post">
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label" data-translate="enter-phone">Nhập số điện thoại</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                                <input type="text" class="form-control" id="phoneNumber" name="PhoneNumber"
+                                       placeholder="Nhập số điện thoại" required data-translate="enter-phone-placeholder" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label" data-translate="enter-password">Nhập mật khẩu</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" class="form-control" id="password" name="Password"
+                                       placeholder="Nhập mật khẩu" required data-translate="enter-password-placeholder" />
+                                <button type="button" class="btn btn-outline-secondary toggle-password">
+                                    <i class="bi bi-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <a href="#" class="text-decoration-none" data-translate="forgot-password">Quên mật khẩu?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" data-translate="login-button">Đăng nhập</button>
+                    </form>
+                </div>
+
+                <!-- Đăng ký -->
+                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                    <h4 id="tabTitle" class="text-center mb-4 fw-bold" data-translate="register-title">Đăng kí tài khoản</h4>
+                    <form asp-action="Register" method="post">
+                        <div class="mb-3">
+                            <label for="registerPhoneNumber" class="form-label" data-translate="enter-phone">Nhập số điện thoại</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                                <input type="text" class="form-control" id="registerPhoneNumber"
+                                       name="RegisterPhoneNumber" placeholder="Nhập số điện thoại" required
+                                       data-translate="enter-phone-placeholder" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100" data-translate="register-button">Đăng ký</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/site.js"></script>
+<script>
+    document.querySelectorAll('.toggle-password').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var passwordInput = button.previousElementSibling;  // Lấy phần tử input password
+            var icon = button.children[0];  // Lấy icon bên trong button
+
+            // Kiểm tra kiểu input hiện tại
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";  // Nếu là mật khẩu, thay đổi thành text để hiển thị mật khẩu
+                icon.classList.remove('bi-eye-slash');  // Thay đổi icon
+                icon.classList.add('bi-eye');
+            } else {
+                passwordInput.type = "password";  // Nếu đã là text, chuyển lại thành password để ẩn mật khẩu
+                icon.classList.remove('bi-eye');  // Thay đổi icon
+                icon.classList.add('bi-eye-slash');
+            }
+        });
+    });
+</script>

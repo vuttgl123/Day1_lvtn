@@ -1,0 +1,147 @@
+﻿<style>
+    /* Simplified styling for the Logout button */
+    .logout-btn, .dropdown-item {
+        background-color: transparent; /* No background */
+        color: #007bff; /* Blue text color */
+        border: none; /* No border */
+        padding: 8px 15px; /* Smaller padding */
+        font-size: 14px; /* Standard font size */
+        font-weight: normal; /* Regular font weight */
+        text-align: left; /* Left-aligned text */
+        width: 100%; /* Full width */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: color 0.3s ease; /* Smooth transition for color change */
+    }
+
+        /* Hover effect for the Logout button and dropdown item */
+        .logout-btn:hover, .dropdown-item:hover {
+            color: #0056b3; /* Darker blue color on hover */
+        }
+</style>
+<header class="navbar navbar-expand-lg navbar-light bg-primary text-white py-2">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <!-- Logo -->
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand text-white fw-bold d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo_luanan.png"
+                     alt="Logo"
+                     style="width: 148px; height: 40px;" />
+            </a>
+            <p class="mb-0 ms-3 text-wrap text-white fw-bold">
+                <span class="d-block" data-translate="service-promise-vn">
+                    Cam kết hoàn 150% nếu nhà xe
+                </span>
+                <span class="d-block" data-translate="service-promise-vn-2">
+                    không cung cấp dịch vụ vận chuyển (*)
+                </span>
+            </p>
+        </div>
+
+        <!-- Links -->
+        <div class="d-flex align-items-center flex-wrap ms-auto">
+            <a href="#" class="text-white me-4 fw-bold" data-translate="my-orders">
+                Đơn hàng của tôi
+            </a>
+            <a href="#" class="text-white me-4 fw-bold" data-translate="sale-tickets">
+                Mở bán vé trên Vubac
+            </a>
+            <div class="dropdown ms-3">
+                <a href="#"
+                   class="text-white dropdown-toggle fw-bold"
+                   id="partnerMenu"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false" data-translate="become-partner">
+                    Trở thành đối tác
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="partnerMenu">
+                    <li><a class="dropdown-item fw-bold" href="#">Hợp tác A</a></li>
+                    <li><a class="dropdown-item fw-bold" href="#">Hợp tác B</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hotline and Account -->
+        <div class="d-flex align-items-center flex-wrap">
+            <!-- Hotline -->
+            <div class="d-flex align-items-center text-white me-3 fw-bold" data-translate="hotline">
+                <i class="bi bi-telephone me-2"></i>
+                <span>Hotline 24/7</span>
+            </div>
+            <!-- Language -->
+            <a href="#" id="lang-en" class="btn btn-outline-light btn-sm fw-bold">
+                EN
+            </a>
+            <a href="#" id="lang-vn" class="btn btn-outline-light btn-sm me-3 fw-bold">
+                VN
+            </a>
+
+            <!-- Login/Account -->
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="dropdown">
+                    <button class="btn btn-light btn-sm fw-bold dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person"></i> @Context.Session.GetString("UserName")
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                        <!-- Thông tin cá nhân with icon -->
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Profile">
+                                <i class="bi bi-person-circle"></i> Thông tin cá nhân
+                            </a>
+                        </li>
+
+                        <!-- Thành Viên with dynamic 'Thường' -->
+                        <li>
+                            <a class="dropdown-item">
+                                <i class="bi bi-person-badge"></i> Thành Viên: <span class="fw-bold">Thường</span>
+                            </a>
+                        </li>
+
+                        <!-- Đơn hàng của tôi -->
+                        <li>
+                            <a class="dropdown-item" asp-controller="Order" asp-action="MyOrders">
+                                <i class="bi bi-cart-fill"></i> Đơn hàng của tôi
+                            </a>
+                        </li>
+
+                        <!-- Ưu đãi -->
+                        <li>
+                            <a class="dropdown-item" asp-controller="Discount" asp-action="Offers">
+                                <i class="bi bi-gift"></i> Ưu đãi
+                            </a>
+                        </li>
+
+                        <!-- Nhận xét chuyến đi -->
+                        <li>
+                            <a class="dropdown-item" asp-controller="Review" asp-action="TripReviews">
+                                <i class="bi bi-pen-fill"></i> Nhận xét chuyến đi
+                            </a>
+                        </li>
+
+                        <!-- Logout with icon -->
+                        <li>
+                            <form method="post" action="@Url.Action("Logout", "Account")" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="dropdown-item logout-btn">
+                                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+
+
+                </div>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" class="btn btn-light btn-sm fw-bold" data-translate="login">
+                    Đăng nhập
+                </a>
+            }
+
+
+
+
+        </div>
+    </div>
+</header>
